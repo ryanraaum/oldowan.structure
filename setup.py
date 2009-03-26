@@ -1,10 +1,14 @@
 from setuptools import setup, find_packages
 import sys, os
 
+PACKAGE = 'structure'
+
+VERSION = open(os.path.join(os.path.dirname(os.path.realpath(__file__)),'oldowan', PACKAGE, 'VERSION')).read().strip()
+
 desc_lines = open('README', 'r').readlines()
 
-setup(name='oldowan.structure',
-      version='0.1.0',
+setup(name='oldowan.%s' % PACKAGE,
+      version=VERSION,
       description=desc_lines[0],
       long_description=''.join(desc_lines[2:]),
       classifiers=[
@@ -24,7 +28,8 @@ setup(name='oldowan.structure',
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
       include_package_data=False,
       namespace_packages = ['oldowan'],
-      zip_safe=True,
+      data_files=[("oldowan/%s" % PACKAGE, ["oldowan/%s/VERSION" % PACKAGE])],
+      zip_safe=False,
       test_suite = 'nose.collector',
       )
 
